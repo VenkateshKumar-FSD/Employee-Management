@@ -1,0 +1,1 @@
+export default { async getSalary(employeeId){ return { data: { salary: 25000 } }; } };

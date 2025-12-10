@@ -1,0 +1,5 @@
+:root{
+  --green:#34d399; --green-dark:#064e3b; --green-light:#bbf7d0; --muted:#6b7280; --bg:#fff; --text:#0f172a;
+}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
+.text-muted{color:var(--muted)}

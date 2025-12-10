@@ -1,0 +1,1 @@
+import React from 'react'; export default function SalaryManagement(){ return <div><h1 style={{color:'var(--green-dark)'}}>Salary Management</h1><div className='text-muted'>Payroll area</div></div> }
