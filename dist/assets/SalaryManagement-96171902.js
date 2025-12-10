@@ -1,0 +1,1 @@
+import{j as a}from"./index-6b86054d.js";function r(){return a.jsxs("div",{children:[a.jsx("h1",{style:{color:"var(--green-dark)"},children:"Salary Management"}),a.jsx("div",{className:"text-muted",children:"Payroll area"})]})}export{r as default};

@@ -1,0 +1,1 @@
+import{j as e}from"./index-6b86054d.js";function t(){return e.jsxs("div",{className:"page",style:{padding:40},children:[e.jsx("h1",{children:"404 - Not Found"}),e.jsx("p",{children:"The page doesn't exist."})]})}export{t as default};

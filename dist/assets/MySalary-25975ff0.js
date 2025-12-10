@@ -1,0 +1,1 @@
+import{j as r}from"./index-6b86054d.js";function a(){return r.jsxs("div",{children:[r.jsx("h1",{style:{color:"var(--green-dark)"},children:"My Salary"}),r.jsx("div",{className:"text-muted",children:"Salary details will appear here."})]})}export{a as default};
