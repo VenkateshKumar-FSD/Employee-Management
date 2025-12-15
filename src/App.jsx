@@ -2,92 +2,62 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Loader from "./components/common/Loader";
-import { lazyDelay } from "./utils/lazyDelay";
 
-/* =======================
-   AUTH PAGES (WITH DELAY)
-   ======================= */
-const SelectLogin = lazy(() =>
-  lazyDelay(() => import("./pages/auth/SelectLogin"))
-);
-const AdminLogin = lazy(() =>
-  lazyDelay(() => import("./pages/auth/AdminLogin"))
-);
-const EmployeeLogin = lazy(() =>
-  lazyDelay(() => import("./pages/auth/EmployeeLogin"))
-);
-const AdminSignup = lazy(() =>
-  lazyDelay(() => import("./pages/auth/AdminSignup"))
-);
-const EmployeeSignup = lazy(() =>
-  lazyDelay(() => import("./pages/auth/EmployeeSignup"))
-);
+/* Layouts */
+import AdminLayout from "./layouts/AdminLayout";
+import EmployeeLayout from "./layouts/EmployeeLayout";
 
-const AdminLayout = lazy(() => import("./layouts/AdminLayout"));
-const EmployeeLayout = lazy(() => import("./layouts/EmployeeLayout"));
+/* Admin Pages */
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import Employees from "./pages/admin/Employees";
+import AddEmployee from "./pages/admin/AddEmployee";
+import EditEmployee from "./pages/admin/EditEmployee";
+import EmployeeDetails from "./pages/admin/EmployeeDetails";
+import LeaveRequests from "./pages/admin/LeaveRequests";
+import AttendanceView from "./pages/admin/AttendanceView";
+import SalaryManagement from "./pages/admin/SalaryManagement";
 
-const AdminDashboard = lazy(() =>
-  import("./pages/admin/AdminDashboard")
-);
-const Employees = lazy(() =>
-  import("./pages/admin/Employees")
-);
-const AddEmployee = lazy(() =>
-  import("./pages/admin/AddEmployee")
-);
-const EditEmployee = lazy(() =>
-  import("./pages/admin/EditEmployee")
-);
-const EmployeeDetails = lazy(() =>
-  import("./pages/admin/EmployeeDetails")
-);
-const LeaveRequests = lazy(() =>
-  import("./pages/admin/LeaveRequests")
-);
-const AttendanceView = lazy(() =>
-  import("./pages/admin/AttendanceView")
-);
-const SalaryManagement = lazy(() =>
-  import("./pages/admin/SalaryManagement")
-);
+/* Employee Pages */
+import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
+import MyProfile from "./pages/employee/MyProfile";
+import ApplyLeave from "./pages/employee/ApplyLeave";
+import MyLeaveStatus from "./pages/employee/MyLeaveStatus";
+import MyAttendance from "./pages/employee/MyAttendance";
+import MySalary from "./pages/employee/MySalary";
 
-const EmployeeDashboard = lazy(() =>
-  import("./pages/employee/EmployeeDashboard")
-);
-const MyProfile = lazy(() =>
-  import("./pages/employee/MyProfile")
-);
-const ApplyLeave = lazy(() =>
-  import("./pages/employee/ApplyLeave")
-);
-const MyLeaveStatus = lazy(() =>
-  import("./pages/employee/MyLeaveStatus")
-);
-const MyAttendance = lazy(() =>
-  import("./pages/employee/MyAttendance")
-);
-const MySalary = lazy(() =>
-  import("./pages/employee/MySalary")
-);
+/* Not Found */
+import NotFound from "./pages/notfound/NotFound";
 
-const NotFound = lazy(() =>
-  import("./pages/notfound/NotFound")
-);
-
+/* Route Protection */
 import AdminRoute from "./components/common/AdminRoute";
 import EmployeeRoute from "./components/common/EmployeeRoute";
+const SelectLogin = lazy(() => import("./pages/auth/SelectLogin"));
+const AdminLogin = lazy(() => import("./pages/auth/AdminLogin"));
+const EmployeeLogin = lazy(() => import("./pages/auth/EmployeeLogin"));
+const AdminSignup = lazy(() => import("./pages/auth/AdminSignup"));
+const EmployeeSignup = lazy(() => import("./pages/auth/EmployeeSignup"));
+
+/* =======================
+   APP
+   ======================= */
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+
+        {/* Suspense ONLY for Auth Pages */}
         <Suspense fallback={<Loader />}>
           <Routes>
+
+            {/* PUBLIC AUTH ROUTES */}
             <Route path="/" element={<Navigate to="/select-login" replace />} />
             <Route path="/select-login" element={<SelectLogin />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/login" element={<EmployeeLogin />} />
             <Route path="/admin/signup" element={<AdminSignup />} />
             <Route path="/employee/signup" element={<EmployeeSignup />} />
+
+            {/* ADMIN ROUTES */}
             <Route element={<AdminRoute />}>
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
@@ -104,6 +74,8 @@ export default function App() {
                 <Route path="salary" element={<SalaryManagement />} />
               </Route>
             </Route>
+
+            {/* EMPLOYEE ROUTES */}
             <Route element={<EmployeeRoute />}>
               <Route path="/employee" element={<EmployeeLayout />}>
                 <Route index element={<EmployeeDashboard />} />
@@ -115,10 +87,13 @@ export default function App() {
                 <Route path="salary" element={<MySalary />} />
               </Route>
             </Route>
+
+            {/* 404 */}
             <Route path="*" element={<NotFound />} />
 
           </Routes>
         </Suspense>
+
       </BrowserRouter>
     </AuthProvider>
   );
