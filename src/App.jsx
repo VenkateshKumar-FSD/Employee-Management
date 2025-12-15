@@ -37,9 +37,6 @@ const EmployeeLogin = lazy(() => import("./pages/auth/EmployeeLogin"));
 const AdminSignup = lazy(() => import("./pages/auth/AdminSignup"));
 const EmployeeSignup = lazy(() => import("./pages/auth/EmployeeSignup"));
 
-/* =======================
-   APP
-   ======================= */
 export default function App() {
   return (
     <AuthProvider>
